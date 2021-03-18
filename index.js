@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
 });
 
 // POST method route
-app.post('/', function (req, res) {
+app.post('/call', function (req, res) {
 	console.log('Welcome POST',req.body)
 	let ret = {api:"AGENT",event:"AGENT_ERROR_MESSAGE",ref:23,data:{error_message:"you_dont_have_call_license"}}
   	if(req.body.data && req.body.data.called_number == '0102030405')
