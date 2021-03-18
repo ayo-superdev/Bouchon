@@ -33,6 +33,20 @@ app.post('/call', function (req, res) {
   		res.send(JSON.stringify({}));
 });
 
+app.post('/statuses', function (req, res) {
+	console.log('Welcome Status POST',req.body)
+	let ret2 = {laReponse:"OK"}
+	let err2 = {api:"AGENT",event:"AGENT_ERROR_MESSAGE",ref:23,data:{error_message:"you_dont_have_call_license"}}
+	const statutsId = [1,20];
+	if(req.body.api != 'AGENT') res.send(JSON.stringify(err2));
+	if (req.body.cmd != 'AGENT_STATE_REQUEST') res.send(JSON.stringify(err2));
+	if (req.body.ref != 23) res.send(JSON.stringify(err2));
+	if(req.body.request_id != 'XXXX') res.send(JSON.stringify(err2));
+	if(! req.body.data instanceof Array ) res.send(JSON.stringify(err2));
+	if(!(req.body.data.state_id == 1 || req.body.data.state_id == 20)) res.send(JSON.stringify(err2));
+		res.send(JSON.stringify(ret2));
+});
+
 //var server = https.createServer(certOptions, app).listen(443, ()=>console.log("OKAY"))
 app.listen(port, () =>
 console.log(`Example app listening on port ${port}!`),
